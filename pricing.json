@@ -1,0 +1,26 @@
+{
+  "source": "https://aisa.one/docs/guides/pricing/ai-model-pricing-llm-inference",
+  "fetched_at": "2026-09-09",
+  "unit": "USD per 1,000,000 tokens",
+  "note": "Muitos preços na página de origem são publicados como faixa por família de modelo, não por modelo individual. Em vez de assumir um valor dentro da faixa, cada entrada abaixo é marcada 'verified: false' quando o número exato não está confirmado. O dashboard e o client devem tratar 'verified: false' e modelos ausentes deste arquivo como custo desconhecido, nunca estimar silenciosamente.",
+  "models": {
+    "gpt-5-nano": {"input": 0.0526, "output": null, "verified": false, "note": "input confirmado; output não publicado individualmente"},
+    "gpt-5.5-pro": {"input": 31.5789, "output": null, "verified": false, "note": "input confirmado; output não publicado individualmente"},
+    "claude-haiku-4-5-20251001": {"input": 1.0526, "output": null, "verified": false, "note": "input aproximado (família Haiku); output não publicado"},
+    "gemini-3.5-flash": {"input": 1.5789, "output": 9.4737, "verified": true, "note": "par completo confirmado na página de pricing"},
+    "deepseek-v4-flash": {"input": 0.1032, "output": 0.2063, "verified": true, "note": "par completo confirmado na página de pricing"},
+    "qwen-flash": {"input": 0.0154, "output": null, "verified": false, "note": "input confirmado; output não publicado"},
+    "qwen3.8-max": {"input": 1.7325, "output": null, "verified": false, "note": "input confirmado; output não publicado"},
+    "grok-4.6": {"input": 1.3158, "output": null, "verified": false, "note": "input constante entre versões Grok; output varia 2.6316-6.3158/M conforme versão, sem mapeamento publicado por modelo"}
+  },
+  "family_ranges_unmapped": {
+    "note": "Faixas publicadas por família, sem quebra por modelo individual. Não usar para cálculo de custo automático — apenas referência humana.",
+    "moonshot_kimi": {"min": 0.4229, "max": 3.1579},
+    "minimax": {"min": 0.2211, "max": 0.2211},
+    "zhipu_glm": {"min": 0.4222, "max": 1.2},
+    "bytedance_seed": {"min": 0.0711, "max": 0.5263},
+    "xiaomi_mimo": {"min": 0.1505, "max": 0.5158},
+    "stepfun": {"min": 0.1053, "max": 0.2105}
+  },
+  "known_data_quality_issue": "A página de pricing referencia 'Claude Opus-4-1' como o modelo mais caro da família Anthropic ($15.7895/M input), mas esse ID não existe na resposta atual de GET /v1/models (que lista opus-4-5, 4-6, 4-7, 4-8 e 5). Ou seja, a documentação de preços e o catálogo de modelos já divergiram — motivo pelo qual este projeto trata preço ausente/não verificado como estado explícito, em vez de tentar adivinhar o modelo mais próximo."
+}
