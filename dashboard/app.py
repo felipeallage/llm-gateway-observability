@@ -57,7 +57,7 @@ if unknown_count > 0:
 st.subheader("Custo por modelo")
 cost_by_model = fdf[fdf["cost_status"] == "known"].groupby("model", as_index=False)["cost_usd"].sum()
 if not cost_by_model.empty:
-    st.plotly_chart(px.bar(cost_by_model, x="model", y="cost_usd", labels={"cost_usd": "USD"}), use_container_width=True)
+    st.plotly_chart(px.bar(cost_by_model, x="model", y="cost_usd", labels={"cost_usd": "USD"}), width="stretch")
 else:
     st.caption("Sem chamadas com preço conhecido ainda.")
 
@@ -66,20 +66,20 @@ with col_a:
     st.subheader("Latência por modelo")
     st.plotly_chart(
         px.box(fdf, x="model", y="latency_ms", points="all", labels={"latency_ms": "ms"}),
-        use_container_width=True,
+        width="stretch",
     )
 with col_b:
     st.subheader("Tokens por chamada")
     st.plotly_chart(
         px.scatter(fdf, x="prompt_tokens", y="completion_tokens", color="model", hover_data=["ts", "run_tag"]),
-        use_container_width=True,
+        width="stretch",
     )
 
 st.subheader("Custo ao longo do tempo (acumulado)")
 timeline = fdf[fdf["cost_status"] == "known"].sort_values("ts").copy()
 if not timeline.empty:
     timeline["cumulative_cost"] = timeline["cost_usd"].cumsum()
-    st.plotly_chart(px.line(timeline, x="ts", y="cumulative_cost", labels={"cumulative_cost": "USD acumulado"}), use_container_width=True)
+    st.plotly_chart(px.line(timeline, x="ts", y="cumulative_cost", labels={"cumulative_cost": "USD acumulado"}), width="stretch")
 
 st.subheader("Log bruto")
-st.dataframe(fdf.sort_values("ts", ascending=False), use_container_width=True)
+st.dataframe(fdf.sort_values("ts", ascending=False), width="stretch")
